@@ -1,0 +1,40 @@
+<div class="form-container">
+  <form [formGroup]="simulationForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="numberOfSimulations">Number of Simulations:</label>
+      <input
+        type="number"
+        formControlName="numberOfSimulations"
+        id="numberOfSimulations"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="changeDoor">Change Door:</label>
+      <input type="checkbox" formControlName="changeDoor" id="changeDoor" />
+    </div>
+
+    <button type="submit">Run Simulation</button>
+  </form>
+</div>
+
+<div
+  style="margin-top: 20px"
+  *ngFor="let simulation of simulationResult; let i = index"
+>
+  <h2>Simulation Result {{ i + 1 }}</h2>
+
+  <!-- Display simulation result details -->
+  <div class="result" [class.winner]="simulation.isWinner">
+    {{ simulation.isWinner ? "Winner" : "Not a winner" }}
+  </div>
+
+  <div *ngFor="let door of simulationResult.doors; let i = index" class="door">
+    <p>Door {{ i + 1 }}</p>
+    <button (click)="toggleDoor(i)">Toggle</button>
+    <p *ngIf="door.isOpen">Opened</p>
+    <p *ngIf="door.hasCar">Car</p>
+    <p *ngIf="door.hasGoat">Goat</p>
+  </div>
+</div>
