@@ -27,28 +27,34 @@
     </button>
   </form>
 </div>
+<div class="results-summary-container">
+  <div class="simulation-results-container">
+    <div
+      style="margin-top: 20px"
+      *ngFor="let simulation of simulationResult; let i = index"
+    >
+      <h2>Simulation Result {{ i + 1 }}</h2>
 
-<div
-  style="margin-top: 20px"
-  *ngFor="let simulation of simulationResult; let i = index"
->
-  <h2>Simulation Result {{ i + 1 }}</h2>
+      <!-- Display simulation result details -->
+      <div class="result" [class.winner]="simulation.isWinner">
+        {{ simulation.isWinner ? "Winner 🚗" : "Not a winner 🐐" }}
+      </div>
 
-  <!-- Display simulation result details -->
-  <div class="result" [class.winner]="simulation.isWinner">
-    {{ simulation.isWinner ? "Winner 🚗" : "Not a winner 🐐" }}
+      <div
+        *ngFor="let door of simulationResult.doors; let i = index"
+        class="door"
+      >
+        <p>Door {{ i + 1 }}</p>
+        <button (click)="toggleDoor(i)">Toggle</button>
+        <p *ngIf="door.isOpen">Opened</p>
+        <p *ngIf="door.hasCar">Car</p>
+        <p *ngIf="door.hasGoat">Goat</p>
+      </div>
+    </div>
   </div>
-
-  <div *ngFor="let door of simulationResult.doors; let i = index" class="door">
-    <p>Door {{ i + 1 }}</p>
-    <button (click)="toggleDoor(i)">Toggle</button>
-    <p *ngIf="door.isOpen">Opened</p>
-    <p *ngIf="door.hasCar">Car</p>
-    <p *ngIf="door.hasGoat">Goat</p>
+  <div class="summary-container">
+    <h2>Summary</h2>
+    <p>Total Wins: {{ totalWins }}</p>
+    <p>Total Losses: {{ totalLosses }}</p>
   </div>
-</div>
-<div style="margin-top: 10px">
-  <p>Summary</p>
-  <p>Total Wins: {{ totalWins }}</p>
-  <p>Total Losses: {{ totalLosses }}</p>
 </div>
