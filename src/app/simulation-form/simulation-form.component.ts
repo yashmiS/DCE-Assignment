@@ -10,6 +10,8 @@ import { SimulationService } from '../services/simulation.service';
 export class SimulationFormComponent implements OnInit {
   simulationForm!: FormGroup;
   simulationResult: any;
+  totalWins: number = 0;
+  totalLosses: number = 0;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -21,6 +23,7 @@ export class SimulationFormComponent implements OnInit {
       numberOfSimulations: [1, Validators.required],
       changeDoor: [true, Validators.required],
     });
+    this.resetCounts();
   }
 
   onSubmit(): void {
@@ -31,6 +34,7 @@ export class SimulationFormComponent implements OnInit {
         .subscribe(
           (response) => {
             this.simulationResult = response;
+            this.updateWinsAndLossesCount(response);
           },
           (error) => {
             console.error('Error during simulation:', error);
@@ -48,5 +52,29 @@ export class SimulationFormComponent implements OnInit {
       this.simulationResult.doors[index].isOpen =
         !this.simulationResult.doors[index].isOpen;
     }
+  }
+
+  updateWinsAndLossesCount(result: any): void {
+    if (result && result.length) {
+      result.forEach((simulation: { isWinner: any }) => {
+        if (simulation.isWinner) {
+          this.totalWins++;
+        } else {
+          this.totalLosses++;
+        }
+      });
+    }
+  }
+
+  resetCounts(): void {
+    this.totalWins = 0;
+    this.totalLosses = 0;
+  }
+
+  resetForm(): void {
+    this.simulationForm.reset({
+      numberOfSimulations: 1,
+      changeDoor: true,
+    });
   }
 }

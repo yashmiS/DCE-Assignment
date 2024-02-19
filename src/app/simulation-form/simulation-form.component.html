@@ -16,6 +16,13 @@
     </div>
 
     <button type="submit">Run Simulation</button>
+    <button
+      type="button"
+      (click)="resetForm(); resetCounts()"
+      class="reset-button"
+    >
+      Reset
+    </button>
   </form>
 </div>
 
@@ -37,4 +44,8 @@
     <p *ngIf="door.hasCar">Car</p>
     <p *ngIf="door.hasGoat">Goat</p>
   </div>
+</div>
+<div style="margin-top: 10px">
+  <p>Total Wins: {{ totalWins }}</p>
+  <p>Total Losses: {{ totalLosses }}</p>
 </div>
