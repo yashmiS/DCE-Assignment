@@ -1,4 +1,6 @@
 <div class="form-container">
+  <span class="car-emoji">🚗</span>
+  <span class="goat-emoji">🐐</span>
   <form [formGroup]="simulationForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="numberOfSimulations">Number of Simulations:</label>
@@ -34,7 +36,7 @@
 
   <!-- Display simulation result details -->
   <div class="result" [class.winner]="simulation.isWinner">
-    {{ simulation.isWinner ? "Winner" : "Not a winner" }}
+    {{ simulation.isWinner ? "Winner 🚗" : "Not a winner 🐐" }}
   </div>
 
   <div *ngFor="let door of simulationResult.doors; let i = index" class="door">
@@ -46,6 +48,7 @@
   </div>
 </div>
 <div style="margin-top: 10px">
+  <p>Summary</p>
   <p>Total Wins: {{ totalWins }}</p>
   <p>Total Losses: {{ totalLosses }}</p>
 </div>

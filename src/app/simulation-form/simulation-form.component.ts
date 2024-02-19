@@ -76,5 +76,6 @@ export class SimulationFormComponent implements OnInit {
       numberOfSimulations: 1,
       changeDoor: true,
     });
+    this.simulationResult = [];
   }
 }

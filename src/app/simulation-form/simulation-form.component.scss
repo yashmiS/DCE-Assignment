@@ -54,11 +54,28 @@ button {
 
 .form-container {
   max-width: 400px;
+  position: relative;
+  background: linear-gradient(to bottom right, #87ceeb, #add8e6);
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.car-emoji,
+.goat-emoji {
+  position: absolute;
+  font-size: 30px;
+}
+
+.car-emoji {
+  top: 10px;
+  left: 10px;
+}
+
+.goat-emoji {
+  top: 10px;
+  right: 10px;
 }
 
 .form-group {
